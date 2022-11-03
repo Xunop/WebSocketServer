@@ -71,8 +71,7 @@
         <profile>
             <id>test</id>
             <properties>
-
-                <build.profile.id>test</build.profile.id>
+                <build.profile.id>pro</build.profile.id>
             </properties>
         </profile>
     </profiles>

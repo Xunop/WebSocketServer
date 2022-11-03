@@ -152,6 +152,7 @@ public class DynamicTaskService {
 //                        task.getMeetingNumber(), task.getMode(), task.getLectureDayOfWeek(), task.getLectureTime(),
 //                        LocalDateTime.now());
 //                WebSocketServer.sendInfo(xml, "kakabot");
+                // todo 判断会话是否存在
                 WebSocketServer.sendInfo(send, "kakabot");
                 // 任务执行成功则更新数据库
                 task.setExecute(true);
