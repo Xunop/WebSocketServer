@@ -39,14 +39,13 @@ public class DynamicTaskService {
 
     public Map<Integer, ScheduledFuture<?>> taskMap = new ConcurrentHashMap<>();
     public List<Integer> taskList = new CopyOnWriteArrayList<>();
-    private final ThreadPoolTaskScheduler syncScheduler;
+    @Resource
+    private ThreadPoolTaskScheduler taskExecutor;
     private final static String commonFormat = TextBlock.commonFormat;
     private final static String message = TextBlock.message;
     private final static String xmlMessage = TextBlock.xmlMessage;
 
-    public DynamicTaskService(ThreadPoolTaskScheduler syncScheduler) {
-        this.syncScheduler = syncScheduler;
-    }
+
 
     /**
      * 查看已开启但还未执行的动态任务
@@ -104,17 +103,18 @@ public class DynamicTaskService {
         };
         LocalDateTime lecDate = now.plusDays(days);
         // 构造授课开始时间
+        // 但是通知应该更早一点，所以我在这里需要提前一小时
         LocalDateTime lecTime = LocalDateTime.of(lecDate.getYear(), lecDate.getMonth(), lecDate.getDayOfMonth(),
                 Integer.parseInt(task.getLectureTime().substring(0, 2)),
                 Integer.parseInt(task.getLectureTime().substring(3, 5)));
+        lecTime = lecTime.minusHours(1);
         Date startTime = converterRegistry.convert(Date.class, lecTime);
-
         // schedule :调度给定的Runnable ，在指定的执行时间调用它。
         // 一旦调度程序关闭或返回的ScheduledFuture被取消，执行将结束。
         // 参数：
         // 任务 – 触发器触发时执行的 Runnable
         // startTime – 任务所需的执行时间（如果这是过去，则任务将立即执行，即尽快执行）
-        ScheduledFuture<?> schedule = syncScheduler.schedule(getRunnable(task), startTime);
+        ScheduledFuture<?> schedule = taskExecutor.schedule(getRunnable(task), startTime);
         task.setStartTime(startTime);
         taskList.add(task.getId());
         // 获取授课时间所在的周数

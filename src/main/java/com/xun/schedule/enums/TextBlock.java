@@ -7,7 +7,6 @@ package com.xun.schedule.enums;
  */
 public class TextBlock {
     public final static String commonFormat = """
-                        
             ===========捕获参数===========
             授课组：%s
             授课主题：%s
@@ -20,7 +19,6 @@ public class TextBlock {
             当前时间：%s
             ======================""";
     public final static String message = """
-                        
             授课组：%s
             授课主题：%s
             主讲人：%s
