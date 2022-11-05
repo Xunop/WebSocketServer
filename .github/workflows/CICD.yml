@@ -20,9 +20,9 @@ jobs:
           sudo apt-get -y install tar
           curl -O https://download.oracle.com/java/19/latest/jdk-19_linux-x64_bin.tar.gz
           mkdir jdk19
-          tar -zxvf ./jdk-19_linux-x64_bin.tar.gz -C /usr/local/
+          tar -zxvf ./jdk-19_linux-x64_bin.tar.gz -C ./
         env:
-          JAVA_HOME: /usr/local/jdk-19.0.1/
+          JAVA_HOME: ./jdk-19.0.1/
           PATH: /usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:$JAVA_HOME/bin
       - name: Build with Maven
         run: mvn -B package --file pom.xml
