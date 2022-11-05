@@ -1,12 +1,12 @@
-package com.xun.schedule.service;
+package cc.xun.schedule.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.xun.schedule.entity.Task;
-import com.xun.schedule.message.TextBlock;
-import com.xun.schedule.mapper.TaskMapper;
-import com.xun.schedule.util.RedisUtil;
-import com.xun.schedule.webScoket.WebSocketServer;
+import cc.xun.schedule.entity.Task;
+import cc.xun.schedule.message.TextBlock;
+import cc.xun.schedule.mapper.TaskMapper;
+import cc.xun.schedule.util.RedisUtil;
+import cc.xun.schedule.webScoket.WebSocketServer;
 import lombok.extern.slf4j.Slf4j;
 import cn.hutool.core.convert.ConverterRegistry;
 import org.springframework.context.annotation.Bean;

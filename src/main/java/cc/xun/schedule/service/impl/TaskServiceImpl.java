@@ -1,6 +1,6 @@
-package com.xun.schedule.service.impl;
+package cc.xun.schedule.service.impl;
 
-import com.xun.schedule.service.TaskService;
+import cc.xun.schedule.service.TaskService;
 import org.springframework.stereotype.Service;
 
 /**

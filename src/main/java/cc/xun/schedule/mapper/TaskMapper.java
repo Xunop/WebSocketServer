@@ -1,7 +1,7 @@
-package com.xun.schedule.mapper;
+package cc.xun.schedule.mapper;
 
+import cc.xun.schedule.entity.Task;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.xun.schedule.entity.Task;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

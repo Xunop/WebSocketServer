@@ -1,4 +1,4 @@
-package com.xun.schedule.service;
+package cc.xun.schedule.service;
 
 /**
  * @Author xun

@@ -1,7 +1,6 @@
-package com.xun.schedule.controller;
+package cc.xun.schedule.controller;
 
-import com.xun.schedule.webScoket.WebSocketServer;
-import org.springframework.stereotype.Controller;
+import cc.xun.schedule.webScoket.WebSocketServer;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

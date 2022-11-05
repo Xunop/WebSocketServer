@@ -1,8 +1,8 @@
-package com.xun.schedule.controller;
+package cc.xun.schedule.controller;
 
-import com.xun.schedule.entity.Task;
-import com.xun.schedule.service.TaskService;
-import com.xun.schedule.service.DynamicTaskService;
+import cc.xun.schedule.entity.Task;
+import cc.xun.schedule.service.DynamicTaskService;
+import cc.xun.schedule.service.TaskService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

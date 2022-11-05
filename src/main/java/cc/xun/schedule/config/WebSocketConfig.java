@@ -1,4 +1,4 @@
-package com.xun.schedule.config;
+package cc.xun.schedule.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

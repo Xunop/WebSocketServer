@@ -1,4 +1,4 @@
-package com.xun.schedule.message;
+package cc.xun.schedule.message;
 
 
 /**

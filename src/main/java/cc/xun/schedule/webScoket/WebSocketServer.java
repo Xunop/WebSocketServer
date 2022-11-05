@@ -1,4 +1,4 @@
-package com.xun.schedule.webScoket;
+package cc.xun.schedule.webScoket;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

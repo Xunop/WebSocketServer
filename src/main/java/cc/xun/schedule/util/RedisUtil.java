@@ -1,4 +1,4 @@
-package com.xun.schedule.util;
+package cc.xun.schedule.util;
 
 import com.alibaba.fastjson.JSONObject;
 import org.jetbrains.annotations.NotNull;
