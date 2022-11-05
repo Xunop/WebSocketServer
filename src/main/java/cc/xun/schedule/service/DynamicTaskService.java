@@ -195,7 +195,6 @@ public class DynamicTaskService {
             throw new RuntimeException("任务id不存在");
         }
         ScheduledFuture<?> scheduledFuture = taskMap.get(id);
-        System.out.println(taskMap.toString());
         return scheduledFuture.state().name();
     }
 
