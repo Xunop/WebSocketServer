@@ -1,4 +1,4 @@
-package com.xun.schedule.enums;
+package com.xun.schedule.message;
 
 
 /**
@@ -27,7 +27,6 @@ public class TextBlock {
             授课形式：%s
             授课日期：%s
             授课时间：%s
-            当前时间：%s
             """;
 
     public final static String xmlMessage = """

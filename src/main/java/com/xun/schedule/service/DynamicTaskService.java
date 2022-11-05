@@ -3,7 +3,7 @@ package com.xun.schedule.service;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.xun.schedule.entity.Task;
-import com.xun.schedule.enums.TextBlock;
+import com.xun.schedule.message.TextBlock;
 import com.xun.schedule.mapper.TaskMapper;
 import com.xun.schedule.util.RedisUtil;
 import com.xun.schedule.webScoket.WebSocketServer;
@@ -145,8 +145,7 @@ public class DynamicTaskService {
             try {
                 String send = message.formatted(task.getGroup(), task.getTopic(), task.getLecturer(),
                         task.getNumOfPeople(),
-                        task.getMeetingNumber(), task.getMode(), task.getLectureDayOfWeek(), task.getLectureTime(),
-                        LocalDateTime.now());
+                        task.getMeetingNumber(), task.getMode(), task.getLectureDayOfWeek(), task.getLectureTime());
 //                String xml = xmlMessage.formatted(task.getGroup(), task.getTopic(), task.getLecturer(),
 //                        task.getNumOfPeople(),
 //                        task.getMeetingNumber(), task.getMode(), task.getLectureDayOfWeek(), task.getLectureTime(),
