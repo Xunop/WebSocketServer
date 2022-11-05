@@ -87,6 +87,8 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.7.5</version>
                 <configuration>
+                    <source>19</source>
+                    <target>19</target>
                     <skip>true</skip>
                     <arguments>--enable-preview</arguments>
                     <jvmArguments>--enable-preview</jvmArguments>
