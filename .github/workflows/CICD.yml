@@ -24,7 +24,7 @@ jobs:
       - name: Rename target
         run: mv target/*.jar target/WebSocketServer.jar
       - name: Upload to server
-        uses: easingthemes/ssh-deploy@v2.2.11
+        uses: easingthemes/ssh-deploy@main
         env:
           ARGS: '-avz --delete'
           SOURCE: 'target/wbServer.jar'
