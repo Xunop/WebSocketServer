@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+    
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main
+      - uses: actions/checkout@v3
+      - name: set up java
+        run: |
+          sudo apt-get -y install curl
+          sudo apt-get -y install tar
+          curl -O https://download.oracle.com/java/19/latest/jdk-19_linux-x64_bin.tar.gz
+          mkdir jdk19
+          tar -zxvf ./jdk-19_linux-x64_bin.tar.gz -C ./jdk19/
+        env:
+          JAVA_HOME: /usr/local/jdk-19.0.1/
+          PATH: /usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:$JAVA_HOME/bin
+      - name: Build with Maven
+        run: mvn -B package --file pom.xml
+      - name: Rename target
+        run: mv target/*.jar target/WebSocketServer.jar
+      - name: Upload to server
+        uses: easingthemes/ssh-deploy@v2.2.11
+        env:
+          ARGS: '-avz --delete'
+          SOURCE: 'target/kakaBot.jar'
+          TARGET: '/home/ubuntu/task'
+          REMOTE_HOST: ${{ secrets.SERVER_HOST }}
+          REMOTE_USER: ubuntu
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_ACCESS_KEY }}
+      - name: Restart Docker
+        uses: appleboy/ssh-action@v0.1.4
+        with:
+          key: ${{ secrets.SERVER_ACCESS_KEY }}
+          host: ${{ secrets.SERVER_HOST }}
+          username: ubuntu
+          script_stop: true
+          script: sudo docker restart wbServer
