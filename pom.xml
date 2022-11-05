@@ -8,7 +8,7 @@
         <version>2.7.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.xun</groupId>
+    <groupId>cc.xun</groupId>
     <artifactId>schedule</artifactId>
     <version>0.0.1-RELEASE</version>
     <name>schedule</name>
@@ -75,6 +75,7 @@
                 <configuration>
                     <source>19</source>
                     <target>19</target>
+                    <skip>true</skip>
                     <compilerArgs>
                         <compilerArg>-Xlint:preview</compilerArg>
                         <compilerArg>--enable-preview</compilerArg>
