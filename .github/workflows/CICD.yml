@@ -39,4 +39,4 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ubuntu
           script_stop: true
-          script: sudo docker restart WbServer
+          script: sudo docker restart wbServer
