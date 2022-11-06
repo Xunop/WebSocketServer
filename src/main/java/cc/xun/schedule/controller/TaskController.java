@@ -3,6 +3,7 @@ package cc.xun.schedule.controller;
 import cc.xun.schedule.entity.Task;
 import cc.xun.schedule.service.DynamicTaskService;
 import cc.xun.schedule.service.TaskService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -12,6 +13,7 @@ import java.util.List;
  * @Author xun
  * @create 2022/10/29 14:45
  */
+@Slf4j
 @RestController
 public class TaskController {
     @Resource
