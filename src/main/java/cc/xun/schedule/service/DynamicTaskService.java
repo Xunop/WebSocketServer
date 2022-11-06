@@ -108,6 +108,7 @@ public class DynamicTaskService {
                 Integer.parseInt(task.getLectureTime().substring(0, 2)),
                 Integer.parseInt(task.getLectureTime().substring(3, 5)));
         lecTime = lecTime.minusHours(1);
+        // 授课时间需要转成 Date 格式
         Date startTime = converterRegistry.convert(Date.class, lecTime);
         // schedule :调度给定的Runnable ，在指定的执行时间调用它。
         // 一旦调度程序关闭或返回的ScheduledFuture被取消，执行将结束。
@@ -115,7 +116,8 @@ public class DynamicTaskService {
         // 任务 – 触发器触发时执行的 Runnable
         // startTime – 任务所需的执行时间（如果这是过去，则任务将立即执行，即尽快执行）
         ScheduledFuture<?> schedule = taskExecutor.schedule(getRunnable(task), startTime);
-        task.setStartTime(startTime);
+        // 这里存 LocalDateTime 格式，第二次执行这个任务时方便修改时间
+        task.setStartTime(lecTime);
         taskList.add(task.getId());
         // 获取授课时间所在的周数
         GregorianCalendar gregorianCalendar = new GregorianCalendar();
@@ -153,8 +155,23 @@ public class DynamicTaskService {
 //                WebSocketServer.sendInfo(xml, "kakabot");
                 // todo 判断会话是否存在
                 WebSocketServer.sendInfo(send, "kakabot");
-                // 任务执行成功则更新数据库
-                task.setExecute(true);
+                // 任务执行次数加1
+                task.setExeNums(task.getExeNums() + 1);
+                // 通过判断执行次数是否需要执行下一个任务
+                if (task.getExeNums() == 1) {
+                    LocalDateTime startTime = task.getStartTime();
+                    // 第二次执行这个任务是在上课前10分钟
+                    startTime = startTime.plusMinutes(50);
+                    // 转换成 Date 格式
+                    ConverterRegistry converterRegistry = ConverterRegistry.getInstance();
+                    Date startDateTime = converterRegistry.convert(Date.class, startTime);
+                    taskExecutor.schedule(getRunnable(task), startDateTime);
+                    // 记得更换任务开始时间
+                    task.setStartTime(startTime);
+                } else {
+                    // 任务执行成功则更新数据库
+                    task.setExecute(true);
+                }
                 taskMapper.updateById(task);
                 redisUtil.set(task.getId().toString(), task);
                 taskList.remove(task.getId());
@@ -199,7 +216,7 @@ public class DynamicTaskService {
     }
 
     /**
-     * 在6点到23点时每半小时执行一次
+     * 在6点到23点时每15分钟执行一次
      * 查找是否有遗漏任务，或者防止服务重启漏任务
      */
     @Bean

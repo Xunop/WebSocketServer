@@ -22,6 +22,9 @@ public class TaskController {
 
     @GetMapping("/createTask")
     public String start(Task task) {
+        // 初始化参数
+        task.setExecute(false);
+        task.setExeNums(0);
         dynamicTaskService.add(task);
         return "动态任务" + task.getId() + "已开启";
     }
