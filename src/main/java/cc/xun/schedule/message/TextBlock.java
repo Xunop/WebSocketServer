@@ -22,7 +22,6 @@ public class TextBlock {
             授课组：%s
             授课主题：%s
             主讲人：%s
-            预计人数：%s
             会议号：%s
             授课形式：%s
             授课日期：%s

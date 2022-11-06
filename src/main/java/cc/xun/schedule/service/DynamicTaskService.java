@@ -79,7 +79,6 @@ public class DynamicTaskService {
     public boolean add(Task task) {
         LocalDateTime now = LocalDateTime.now();
         // 此处的逻辑是 ，如果本周数已经有任务存在，先删除之前的，再添加现在的。（即重复就覆盖）
-
         if (null != taskMap.get(task.getId()) || redisUtil.hasKey(task.getId().toString()) || taskMapper.exists(
                 new LambdaQueryWrapper<Task>().eq(Task::getId, task.getId()))) {
             stop(task.getId());
@@ -146,7 +145,6 @@ public class DynamicTaskService {
             log.info("---动态定时任务运行---");
             try {
                 String send = message.formatted(task.getGroup(), task.getTopic(), task.getLecturer(),
-                        task.getNumOfPeople(),
                         task.getMeetingNumber(), task.getMode(), task.getLectureDayOfWeek(), task.getLectureTime());
 //                String xml = xmlMessage.formatted(task.getGroup(), task.getTopic(), task.getLecturer(),
 //                        task.getNumOfPeople(),
